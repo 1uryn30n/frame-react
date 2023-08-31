@@ -30,3 +30,15 @@
 .post img {
   max-width: 100%;
 }
+
+#txtSearch {
+  width: 98.5%;
+  height: 40px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  font-size: 22px;
+  margin-bottom: 10px;
+  color: #999;
+  font-weight: 500;
+}

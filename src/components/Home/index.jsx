@@ -11,7 +11,8 @@ class Home extends Component {
     posts: [],
     allPosts: [],
     page: 0,
-    postsPerPage: 2,
+    postsPerPage: 10,
+    searchValue: "",
   };
 
   // fetch aqui
@@ -39,13 +40,34 @@ class Home extends Component {
     this.setState({ posts: [...posts, ...nextPosts], page: nextPage });
   };
 
+  handleSearch = (e) => {
+    const { value } = e.target;
+    this.setState({ searchValue: value });
+    // console.log(value);
+  };
+
   render() {
-    const { posts } = this.state;
+    const { posts, searchValue } = this.state;
+
+    const filteredPosts = !!searchValue
+      ? posts.filter((post) => {
+          return post.title.toLowerCase().includes(searchValue.toLowerCase());
+        })
+      : posts;
 
     return (
       <section className="container">
+        <input
+          type="text"
+          name="txtSearch"
+          id="txtSearch"
+          placeholder="Search..."
+          onChange={this.handleSearch}
+          value={searchValue}
+        />
+
         <div className="posts">
-          {posts.map((post) => (
+          {filteredPosts.map((post) => (
             <PostCard key={post.id} post={post} />
           ))}
         </div>
